@@ -1,0 +1,7 @@
+.navLinks >li> a{
+    background-color: transparent !important ;
+    color: white;
+}
+.active{
+    border: 1px solid #fff;
+}
