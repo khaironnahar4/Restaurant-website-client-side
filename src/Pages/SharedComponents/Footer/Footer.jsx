@@ -2,7 +2,7 @@ import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa6";
 
 function Footer() {
   return (
-    <footer>
+    <footer className="lg:mt-[90px] md:mt-[65px] mt-11">
       <div className="w-full md:flex justify-between items-start text-white">
         <div className="bg-[#1F2937] md:w-1/2 flex flex-col text-center md:h-[320px] justify-center py-9 items-center">
           <h1 className="text-2xl text-white">Contact Us</h1>

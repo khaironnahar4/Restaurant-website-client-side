@@ -1,7 +1,7 @@
 design analysis: 
 shared page components:
-    1. navbar
-    2. footer
+    1. navbar *
+    2. footer *
 
 components:
     1. heading
@@ -9,10 +9,10 @@ components:
     3. button
 
 Home page:
-    1. banner with carousel
-    2. order online carousel
-    3. bistro boss (paralax)
-    4. from our menu
+    1. banner with carousel *
+    2. order online carousel*
+    3. bistro boss (paralax)*
+    4. from our menu*
     5. call us
     6. chef recommend
     7. from our menu (paralax)
