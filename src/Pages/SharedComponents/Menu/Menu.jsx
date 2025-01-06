@@ -1,7 +1,7 @@
 import Button from "../../../Components/Button/Button"
 import "./Menu.css"
 
-function Menu({menuDatas}) {
+function Menu({menuDatas, buttonName}) {
   return (
     <div>
         <div className="grid lg:grid-cols-2 gap-6 p-6 lg:p-0">
@@ -19,7 +19,7 @@ function Menu({menuDatas}) {
         }
        
     </div>
-    <Button text="View Full Menu"></Button>
+    <Button text={buttonName}></Button>
     </div>
   )
 }

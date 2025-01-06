@@ -5,3 +5,19 @@
     background-size: cover;
     /* background-attachment: fixed; */
 }
+.our-menu{
+    background-image: url('../../../assets/Image/featured.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-blend-mode: darken;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* opacity: 0.6; */
+}
+
+@media only screen and (max-device-width: 780px) {
+    .our-menu{
+        background-attachment: scroll;
+    }
+  }

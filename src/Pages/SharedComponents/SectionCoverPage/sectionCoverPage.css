@@ -1,0 +1,6 @@
+.cover-page{
+    /* background-image: url("../../../assets/menu/menu-bg.png"); */
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}

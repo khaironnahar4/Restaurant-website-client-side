@@ -11,7 +11,7 @@ function OurMenu() {
     <div>
         <SectionHeading subHeading="Check It Out" heading="from our menu"></SectionHeading>
         <div>
-            <Menu menuDatas={datas}></Menu>
+            <Menu menuDatas={datas} buttonName="view full menu"></Menu>
         </div>
     </div>
   )
