@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "proxy": "https://api.imgbb.com"
+    "proxy": "http://localhost:5000"
   },
   "dependencies": {
     "@smastrom/react-rating": "^1.5.0",
