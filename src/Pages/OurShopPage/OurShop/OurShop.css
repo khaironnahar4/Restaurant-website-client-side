@@ -1,0 +1,11 @@
+.our-shop{
+    background-image: url('../../../assets/shop/banner2.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* .react-tabs__tab--selected:active{
+    border: none;
+    border-bottom: 1px solid black;
+} */

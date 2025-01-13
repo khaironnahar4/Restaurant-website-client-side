@@ -2,6 +2,7 @@
     background-image: url('../../../assets/menu/banner3.jpg');
     background-position: center;
     background-repeat: no-repeat;
+    background-size: cover;
     /* background-blend-mode: darken;
     background-color: #00000080; */
 }

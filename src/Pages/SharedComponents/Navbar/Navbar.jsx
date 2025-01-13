@@ -1,8 +1,14 @@
 import { FaCartShopping } from "react-icons/fa6";
 import { Link, NavLink } from "react-router-dom";
 import "./Navbar.css";
+import useAuth from "../../../Auth/UseAuth/useAuth";
+import profileImg from "../../../assets/others/profile.png"
+import useCart from "../../../Hooks/useCart";
 
 function Navbar() {
+  const {user, handleSignOut} = useAuth();
+  const [cart] = useCart();
+
   const manu = (
     <>
       <li>
@@ -45,12 +51,7 @@ function Navbar() {
           Our Shop
         </NavLink>
       </li>
-      <li>
-        <NavLink to="/add-to-card"> </NavLink>
-      </li>
 
-      <li></li>
-      <li></li>
     </>
   );
 
@@ -89,15 +90,29 @@ function Navbar() {
         <ul className="menu navLinks menu-horizontal px-1">{manu}</ul>
       </div>
       <div className="navbar-end gap-4">
-        <a
+        <Link to='/dashboard/cart'
           className={
-            "flex justify-center items-center text-xl text-white border border-transparent hover:border-white px-4 py-2 rounded-md"
+            "flex justify-center items-center text-xl text-white border border-transparent hover:border-white px-4 py-2 rounded-md indicator"
           }
         >
+          <span className="indicator-item badge badge-secondary">+{cart.length}</span>
           <FaCartShopping />
-        </a>
-        <a className="btn">Log In</a>
-        <a className="btn">Sign up</a>
+        </Link>
+        {
+          user && user?.email ? 
+          <>
+          <Link to='/dashboard/home' 
+          className="w-10 h-10 rounded-full overflow-hidden cursor-pointer"><img src={profileImg} alt="profile image" /></Link>
+          <button className="text-white border border-white bg-transparent px-2 py-2 rounded-md hover:text-black hover:bg-white" 
+          onClick={()=> handleSignOut()}>Sign Out</button>
+          </> 
+          : 
+          <>
+          <Link to={'/sign-in'} className="btn">Log In</Link>
+          <Link to={'/register'} className="btn">Sign up</Link>
+          </>
+        }
+        
       </div>
     </div>
   );

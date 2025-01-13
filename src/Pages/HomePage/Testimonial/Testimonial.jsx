@@ -12,14 +12,14 @@ import "swiper/css/autoplay";
 // import required modules
 import { Navigation, Keyboard, Autoplay } from "swiper/modules";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 function Testimonial() {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch("reviews.json")
-      .then((res) => res.json())
-      .then((data) => setReviews(data));
+    axios.get("http://localhost:5000/reviews")
+      .then((res) => setReviews(res.data));
   }, []);
 
   return (

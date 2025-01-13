@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react"
 
 
@@ -6,12 +7,11 @@ function useCategory(name) {
     // console.log(name);
     
     useEffect(()=>{
-        fetch(`menu.json`)
-        .then(res => res.json())
-        .then(data => {
-            const selectedDatas = data.filter(item => item.category===name);
-            setDatas(selectedDatas);
+        axios.get(`http://localhost:5000/menu?category=${name}`)
+        .then(res => {
+            setDatas(res.data);
         })
+       
     }, [name])
   return [datas];
 }
