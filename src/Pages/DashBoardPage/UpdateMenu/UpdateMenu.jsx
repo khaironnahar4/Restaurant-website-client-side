@@ -1,57 +1,58 @@
 import { useForm } from "react-hook-form";
-import SectionHeading from "../../../Components/SectionHeading/SectionHeading";
+import SectionHeading from "../../../Components/SectionHeading/SectionHeading"
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
-// import axios from "axios";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_UPLOAD_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
-function AddItems() {
-  const axiosPublic = useAxiosPublic();
-  const axiosSecure = useAxiosSecure();
-  const { register, handleSubmit } = useForm();
-  const onSubmit = async (data) => {
-    // console.log(data, data.image[0].name);
+function UpdateMenu() {
+    const { register, handleSubmit } = useForm();
+    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
+    const {_id, name, recipe, image, category, price} = useLoaderData();
+    const navigate = useNavigate();
 
-    const imageFile = { image: data.image[0] };
-    console.log(data);
-
-    const res = await axiosPublic.post(image_hosting_api, imageFile, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-
-    // console.log(res.data , parseFloat(data.price), res.data.data.display_url);
+    const onSubmit = async (data) => {
+        // console.log(data, data.image[0].name);
     
-
-    if (res.data.success) {
-      // console.log('send menu to server');
-      const menuData = {
-        name: data.name,
-        recipe: data.recipe,
-        image: res.data.data.display_url,
-        category: data.category,
-        price: parseFloat(data.price),
-      }
-
-      const result = await axiosSecure.post('/menu', menuData);
-      if(result.data.insertedId){
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Menu has beed uploaded successfully!",
-          showConfirmButton: false,
-          timer: 1500
+        const imageFile = { image: data.image[0] };
+        // console.log(data);
+    
+        const res = await axiosPublic.post(image_hosting_api, imageFile, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         });
         
-      }
-
-    }
-  };
-
+    
+        if (res.data.success) {
+          const menuData = {
+            name: data.name,
+            recipe: data.recipe,
+            image: res.data.data.display_url,
+            category: data.category,
+            price: parseFloat(data.price),
+          }
+    
+          const result = await axiosSecure.patch(`/menu/${_id}`, menuData);
+        //   console.log(result.data);
+          
+          if(result.data.modifiedCount>0){
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Menu has beed updated successfully!",
+              showConfirmButton: false,
+              timer: 1500
+            });
+            navigate('/dashboard/manage-items');
+          }
+    
+        }
+      };
   return (
     <div>
       <SectionHeading
@@ -68,6 +69,7 @@ function AddItems() {
             </div>
             <input
               type="text"
+              defaultValue={name}
               placeholder="Recipe name"
               className="input input-bordered w-full"
               {...register("name")}
@@ -81,6 +83,7 @@ function AddItems() {
               </div>
               <select
                 {...register("category")}
+                defaultValue={category}
                 className="select select-bordered"
               >
                 <option disabled selected>
@@ -101,6 +104,7 @@ function AddItems() {
               </div>
               <input
                 type="text"
+                defaultValue={price}
                 placeholder="Price"
                 className="input input-bordered w-full"
                 {...register("price")}
@@ -115,6 +119,7 @@ function AddItems() {
             </div>
             <textarea
               className="textarea textarea-bordered h-56"
+              defaultValue={recipe}
               placeholder="Recipe Details"
               {...register("recipe")}
             ></textarea>
@@ -131,13 +136,13 @@ function AddItems() {
           {/* button */}
           <div className="mt-6 flex justify-center">
             <button className="btn bg-[#D1A054] text-white hover:bg-[#D1A054]">
-              Add Item
+              Update Item
             </button>
           </div>
         </form>
       </div>
     </div>
-  );
+  )
 }
 
-export default AddItems;
+export default UpdateMenu
